@@ -34,4 +34,4 @@ nginx + php-fpm (laravel/wordpress) + python (flask/django) + js(react/angular);
 
     curl localhost:8080 && echo '' &&  curl localhost:8081 && echo '' &&  curl localhost:8082 && echo ''
 
-![]()  
+![](https://github.com/MaxOOOOON/web/blob/main/pictures/Screenshot_20211124_233246.png)  
