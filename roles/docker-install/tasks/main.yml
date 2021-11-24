@@ -41,7 +41,6 @@
     state: present
   loop: 
     - python3
-    # - python-devel
     - gcc
 
 

@@ -30,6 +30,8 @@ nginx + php-fpm (laravel/wordpress) + python (flask/django) + js(react/angular);
 деплой через docker-compose.
 
 
+Проверка на хостовой машине
 
+    curl localhost:8080 && echo '' &&  curl localhost:8081 && echo '' &&  curl localhost:8082 && echo ''
 
-sudo chmod 666 /var/run/docker.sock
+![]()  

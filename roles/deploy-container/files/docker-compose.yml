@@ -1,5 +1,4 @@
 ---
-
 version: "3.9"
 services:
   nginx:
@@ -9,15 +8,15 @@ services:
       - 81:81
       - 82:82
     volumes:
-      # - ./logs:/etc/logs/nginx
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/php.conf:/etc/nginx/conf.d/php.conf:ro
+      - ./nginx/php.conf:/etc/nginx/conf.d/default.conf:ro
       - ./nginx/js.conf:/etc/nginx/conf.d/js.conf:ro
+      - ./nginx/python.conf:/etc/nginx/conf.d/python.conf:ro
       - ./php:/var/www/html:rw
-    links:
+    depends_on:
       - fpm
       - nodeserver
-    #   - go
+      - flask_app
     networks:
       - web
 
@@ -25,6 +24,8 @@ services:
     image: php:7-fpm
     volumes:
       - ./php:/var/www/html:rw
+    ports:
+      - "9000:9000"
     networks:
       - web
 
@@ -35,10 +36,15 @@ services:
     networks:
       - web
 
-  # python:
-  #   build: ./python
-  #   networks:
-  #     - web
-      
+  flask_app:
+    container_name: flask_app
+    restart: always
+    build: ./python
+    ports:
+      - "8000:8000"
+    command: gunicorn -w 1 -b 0.0.0.0:8000 wsgi:server
+    networks:
+      - web
+
 networks:
   web:

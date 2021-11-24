@@ -11,8 +11,19 @@
     src: .
     dest: /home/vagrant/
 
+# - name: Enable run docker another user
+#   shell: groupadd docker
+#   ignore_errors: true
+
+- name: Enable run docker another user
+  shell:  usermod -aG docker vagrant
+  ignore_errors: true
+
+
 - name: Enable run docker another user
   shell: sudo chmod 666 /var/run/docker.sock
+  ignore_errors: true
+
 
 
 - name: Run docker-compose
