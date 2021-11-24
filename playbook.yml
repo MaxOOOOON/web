@@ -1,0 +1,8 @@
+---
+- name: Установка docker
+  hosts: web
+  become: yes
+  roles:
+  - docker-install
+  - deploy-container
+

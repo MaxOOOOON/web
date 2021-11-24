@@ -1,0 +1,44 @@
+---
+
+version: "3.9"
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - 80:80
+      - 81:81
+      - 82:82
+    volumes:
+      # - ./logs:/etc/logs/nginx
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/php.conf:/etc/nginx/conf.d/php.conf:ro
+      - ./nginx/js.conf:/etc/nginx/conf.d/js.conf:ro
+      - ./php:/var/www/html:rw
+    links:
+      - fpm
+      - nodeserver
+    #   - go
+    networks:
+      - web
+
+  fpm:
+    image: php:7-fpm
+    volumes:
+      - ./php:/var/www/html:rw
+    networks:
+      - web
+
+  nodeserver:
+    build: ./js
+    ports:
+      - "5000:5000"
+    networks:
+      - web
+
+  # python:
+  #   build: ./python
+  #   networks:
+  #     - web
+      
+networks:
+  web:

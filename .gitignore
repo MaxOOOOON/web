@@ -1,0 +1,5 @@
+.vagrant
+*.log
+buffer
+host-profile
+package-lock.json

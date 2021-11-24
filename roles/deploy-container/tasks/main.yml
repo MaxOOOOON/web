@@ -1,0 +1,20 @@
+---
+- name: Copy docker compose file
+  become_user: vagrant
+  copy:
+    src: docker-compose.yml
+    dest: /home/vagrant/docker-compose.yml
+
+- name: Copy files
+  become_user: vagrant
+  copy:
+    src: .
+    dest: /home/vagrant/
+
+- name: Enable run docker another user
+  shell: sudo chmod 666 /var/run/docker.sock
+
+
+- name: Run docker-compose
+  become_user: vagrant
+  shell: docker-compose -f /home/vagrant/docker-compose.yml up -d
