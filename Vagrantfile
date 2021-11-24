@@ -29,18 +29,6 @@ Vagrant.configure("2") do |config|
                     vb.customize ["modifyvm", :id, "--memory", "512"]
             end        
       
-
-
-            # config.vm.define "web", primary: true do |w|
-            #     w.vm.hostname = 'web'
-            #     w.vm.network "private_network", ip: "192.168.100.20"
-            #     w.vm.provider :virtualbox do |v|
-            #         v.name = "web"
-            #         v.customize ["modifyvm", :id, "--cpus", 4, "--memory", "2048"]
-            
-            #     end
-
-      
             box.vm.network "forwarded_port", guest: 80, host: 8080
             box.vm.network "forwarded_port", guest: 81, host: 8081
             box.vm.network "forwarded_port", guest: 82, host: 8082
